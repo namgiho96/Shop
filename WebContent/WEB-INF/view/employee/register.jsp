@@ -8,8 +8,8 @@
 <div class="grid-item" id="content">
 <form id="form" name="form" >
 	<div class="grid-container">
-	    <div class="grid-item" id="item_1">사원번호</div>
-	    <div class="grid-item" id="item_2"><input type="text" id="empno" name="empno" ></div>
+	    <div class="grid-item" id="item_1">이미지</div>
+	    <div class="grid-item" id="item_2"><input type="text" id="Photo" name="Photo" ></div>
 	    <div class="grid-item" id="item_3">이 름</div>
 	    <div class="grid-item" id="item_4"><input type="text" id="name" name="name" ></div>
 	    <div class="grid-item" id="item_5">매니저</div>
@@ -17,10 +17,10 @@
 	    <div class="grid-item" id="item_7">생년월일</div>
 	    <div class="grid-item" id="item_8"><input type="text" id="birthday" name="birthday" ></div>
 	    <div class="grid-item" id="item_9">상 세</div>
-	    <div class="grid-item" id="item_10"><input type="text" id="desc" name="desc" ></div>
+	    <div class="grid-item" id="item_10"><input type="text" id="Notes" name="Notes" ></div>
 	    <div class="grid-item" id="item_11"><input type="submit" id="confirm_btn" value='확 인'></div>
 	    <div class="grid-item" id="item_12"><input type="reset" id="cancel_btn" value='취 소'> </div>
-	    <input type="hidden" name="cmd" value="move" />
+	    <input type="hidden" name="cmd" value="register" />
 	    <input type="hidden" name="page" value="access" />
 	</div>
 </form>

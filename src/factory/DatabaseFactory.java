@@ -1,22 +1,19 @@
 package factory;
 
-import pool.Constant;
+import enums.Vendor;
 
-public class DatabaseFactory {
-	public static DateBase createDatebase(
-			String vender 
-			) {
-		DateBase base = null;
-		switch(vender) {
-		case "oracle":
-			base = new Oracle(
-					Constant.ORACLE_DRIVER,
-					Constant.ORACLE_URL,
-					Constant.USERNAME,
-					Constant.PASSWORD);
+public class Databasefactory {
+	public static Database createDatabase(Vendor v) {
+		Database db =null;		
+		switch (v) {
+		case ORACLE:
+			db = new Oracle();
+			break;
+
+		default:
 			break;
 		}
-		return base;
-		
+		return db;
 	}
+
 }

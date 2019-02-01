@@ -2,6 +2,6 @@ package factory;
 
 import java.sql.Connection;
 
-public interface DateBase {
+public interface Database {
 	public Connection getConnection();
 }

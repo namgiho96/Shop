@@ -6,7 +6,7 @@ import domain.EmployeeDTO;
 
 public interface EmployeeService {
 	
-	public void addEmployee(EmployeeDTO emp);
+	public void registEmployee(EmployeeDTO emp);
 
 	public List<EmployeeDTO> bringEmployee();
 

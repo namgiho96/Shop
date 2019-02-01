@@ -12,10 +12,12 @@ public class Commander {
 		Command cmd = null;
 		switch (Action.valueOf(request.getParameter("cmd").toUpperCase())) {
 		case MOVE:
-			cmd = new MoveCommand(request, response);
+			System.out.println("COMMANDER :::::MOVE:::: 로온다");
+			cmd = new Command(request,response);
 			break;
-
-		default:
+		case REGISTER:
+			System.out.println("COMMANDER:::::REGISTER:::: 로온다");
+			cmd = new CreateCommand(request, response);
 			break;
 		}
 

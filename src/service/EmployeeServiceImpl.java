@@ -17,7 +17,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 	@Override
-	public void addEmployee(EmployeeDTO emp) {
+	public void registEmployee(EmployeeDTO emp) {
+		System.out.println(">>>>>>서비스임플 진입<<<<<<");
 		dao.insertEmployee(emp);
 	}
 
