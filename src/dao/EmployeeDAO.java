@@ -18,7 +18,7 @@ public interface EmployeeDAO {
 
 	public int countEmplotees();
 
-	public boolean existsEmployee(String serachWord);
+	public boolean existsEmployee(EmployeeDTO emp);
 
 	public void updateEmployee(EmployeeDTO emp);
 

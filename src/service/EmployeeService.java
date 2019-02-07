@@ -16,7 +16,7 @@ public interface EmployeeService {
 
 	public int countEmplotees();
 
-	public boolean existEmployee(String serachWord);
+	public boolean existEmployee(EmployeeDTO emp);
 
 	public void modfyEmployee(EmployeeDTO emp);
 

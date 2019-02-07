@@ -2,6 +2,8 @@ package service;
 
 import java.util.List;
 
+import dao.CustomerDAO;
+import dao.CustomerDAOImpl;
 import domain.CustomerDTO;
 
 public class CustomerServiceImpl implements CustomerService {
@@ -9,19 +11,19 @@ public class CustomerServiceImpl implements CustomerService {
 	private static CustomerServiceImpl instance = new CustomerServiceImpl();
 
 	private CustomerServiceImpl() {
-		dao = CustomerServiceImpl.getInstance();
+		dao = CustomerDAOImpl.getInstance();
 	}
 
 	public static CustomerServiceImpl getInstance() {
 		return instance;
 	}
 
-	CustomerServiceImpl dao;
+	CustomerDAO dao;
 
 	@Override
 	public void addCustomer(CustomerDTO cust) {
-		// TODO Auto-generated method stub
-
+		dao.insertCustomer(cust);
+		
 	}
 
 	@Override
@@ -49,9 +51,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public boolean existCustomer(String serachWord) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existCustomer(CustomerDTO cust) {
+		return	dao.existsCustomer(cust);
 	}
 
 	@Override

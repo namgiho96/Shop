@@ -15,7 +15,7 @@ public interface CustomerDAO {
 
 	public int countCustomer();
 
-	public boolean existsCustomer(String serachWord);
+	public boolean existsCustomer(CustomerDTO cust);
 
 	public void updateCustomer(CustomerDTO cust);
 

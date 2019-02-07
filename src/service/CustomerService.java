@@ -16,7 +16,7 @@ public interface CustomerService {
 
 	public int countCustomer();
 
-	public boolean existCustomer(String serachWord);
+	public boolean existCustomer(CustomerDTO cust);
 
 	public void modfyCustomer(CustomerDTO cust);
 

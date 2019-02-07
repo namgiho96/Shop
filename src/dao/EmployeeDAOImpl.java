@@ -2,12 +2,14 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import domain.EmployeeDTO;
 import enums.EmployeeSQL;
 import enums.Vendor;
+import factory.Database;
 import factory.Databasefactory;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -25,7 +27,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public void insertEmployee(EmployeeDTO emp) {
 		try {
-            System.out.println("=====6.다오임플진입====");
+            System.out.println("(사원등록)=====6.다오임플진입====");
             String sql = EmployeeSQL.REGISTER.toString();
             System.out.println("===실행 쿼리==="+sql);
             Connection conn = Databasefactory.createDatabase(Vendor.ORACLE).getConnection();
@@ -46,7 +48,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public List<EmployeeDTO> selectEmployee() {
-		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
 
@@ -69,9 +72,33 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	}
 
 	@Override
-	public boolean existsEmployee(String serachWord) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existsEmployee(EmployeeDTO emp) {
+		System.out.println("로그인 들어옴");
+			boolean ok = false;
+		try {
+			String sql = EmployeeSQL.ACCESS.toString();
+			PreparedStatement ps = Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			System.out.println("사번: "+emp.getEmployeeID());
+			System.out.println("이름: "+emp.getName());
+			ps.setString(1,emp.getEmployeeID());
+			ps.setString(2,emp.getName());
+			
+			if(ps.executeQuery().next()) {
+				System.out.println("로그인 성공");
+				ok = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		return ok;
+		
+		
+	
 	}
 
 	@Override

@@ -2,3 +2,6 @@
 /factory/
 /controller/
 /command/
+/domain/
+/dao/
+/service/
