@@ -1,13 +1,13 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import domain.CustomerDTO;
 import enums.CustomerSQL;
 import enums.Vendor;
-import factory.Database;
 import factory.Databasefactory;
 
 public class CustomerDAOImpl implements CustomerDAO {
@@ -51,7 +51,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		  		System.out.println("입력실패");
 		  	}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -72,9 +72,36 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public CustomerDTO selectCustomer(String serachWord) {
-		// TODO Auto-generated method stub
-		return null;
+	public CustomerDTO selectCustomer(CustomerDTO cust) {
+		CustomerDTO dto = null;
+		
+		try {
+		PreparedStatement ps =	Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(CustomerSQL.SIGNIN.toString());
+		ps.setString(1,cust.getCustomerID());
+		ps.setString(2,cust.getPassword());
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			dto = new CustomerDTO();
+			dto.setAddress(rs.getString("ADDRESS"));
+			dto.setCity(rs.getString("CITY"));
+			dto.setCustomerID(rs.getString("CUSTOMER_ID"));
+			dto.setCustomerName(rs.getString("CUSTOMER_NAME"));
+			dto.setPassword(rs.getString("PASSWORD"));
+			dto.setPostalCode(rs.getString("POSTALCODE"));
+			dto.setSsn(rs.getString("SSN"));
+			
+			
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 
 	@Override
@@ -84,7 +111,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public boolean existsCustomer(CustomerDTO cust) {
+	public boolean existsCustomerID(CustomerDTO cust) {
 		boolean ok = false;
 		try {
 			String sql = CustomerSQL.SIGNIN.toString();

@@ -39,9 +39,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerDTO retriveCustomer(String serachWord) {
+	public CustomerDTO retriveCustomer(CustomerDTO cust) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.selectCustomer(cust);
 	}
 
 	@Override
@@ -51,8 +51,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public boolean existCustomer(CustomerDTO cust) {
-		return	dao.existsCustomer(cust);
+	public boolean existsCustomerID(CustomerDTO cust) {
+		return	dao.existsCustomerID(cust);
 	}
 
 	@Override

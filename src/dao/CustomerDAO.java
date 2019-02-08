@@ -11,11 +11,11 @@ public interface CustomerDAO {
 
 	public List<CustomerDTO> selectCustomers(String serachWord);
 
-	public CustomerDTO selectCustomer(String serachWord);
+	public CustomerDTO selectCustomer(CustomerDTO cust);
 
 	public int countCustomer();
 
-	public boolean existsCustomer(CustomerDTO cust);
+	public boolean existsCustomerID(CustomerDTO cust);
 
 	public void updateCustomer(CustomerDTO cust);
 

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import domain.EmployeeDTO;
@@ -48,29 +49,105 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public List<EmployeeDTO> selectEmployee() {
+		List<EmployeeDTO> list = new ArrayList<>();
 		
 		
-		return null;
+		
+		try {
+			
+			String sql = "";
+			
+			PreparedStatement ps =	Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			ps.setString(1,"");
+			
+		while(ps.executeQuery().next()) {
+			list.add(null);
+		}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return list;
 	}
 
 	@Override
 	public List<EmployeeDTO> selectEmployees(String serachWord) {
-		// TODO Auto-generated method stub
-		return null;
+		List<EmployeeDTO> list = new ArrayList<>();
+		
+		try {
+			String sql = "";
+			PreparedStatement ps = Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			ps.setString(1, "");
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				list.add(null);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	@Override
 	public EmployeeDTO selectEmployee(String serachWord) {
-		// TODO Auto-generated method stub
-		return null;
+		EmployeeDTO dto = new EmployeeDTO();
+		
+		try {
+			String sql = "";
+		PreparedStatement ps =	Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			ps.setString(1,"");
+		ResultSet rs =	ps.executeQuery();
+		
+		while(rs.next()) {
+			
+		}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
 	public int countEmplotees() {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		try {
+			
+			String sql = "";
+			
+		PreparedStatement ps =	Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			ps.setString(1, "");
+		ResultSet rs =	ps.executeQuery();
+			while(rs.next()) {
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
-
 	@Override
 	public boolean existsEmployee(EmployeeDTO emp) {
 		System.out.println("로그인 들어옴");
@@ -103,14 +180,41 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public void updateEmployee(EmployeeDTO emp) {
-		// TODO Auto-generated method stub
+		
+		try {
+			String sql = "";
+	PreparedStatement ps = Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			ps.setString(1,"");
+			ps.executeUpdate();
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void deleteEmployee(EmployeeDTO emp) {
-		// TODO Auto-generated method stub
 
+		String sql = "";
+		try {
+		PreparedStatement ps =	Databasefactory
+				
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			ps.setString(1, "");
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 	}
 
 }

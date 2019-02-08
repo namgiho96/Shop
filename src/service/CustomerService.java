@@ -12,11 +12,11 @@ public interface CustomerService {
 
 	public List<CustomerDTO> retriveCustomers(String serachWord);
 
-	public CustomerDTO retriveCustomer(String serachWord);
+	public CustomerDTO retriveCustomer(CustomerDTO cust);
 
 	public int countCustomer();
 
-	public boolean existCustomer(CustomerDTO cust);
+	public boolean existsCustomerID(CustomerDTO cust);
 
 	public void modfyCustomer(CustomerDTO cust);
 
