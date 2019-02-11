@@ -3,6 +3,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import domain.CustomerDTO;
@@ -39,11 +40,14 @@ public class CustomerDAOImpl implements CustomerDAO {
 		  	ps.setString(1,cust.getCustomerID());
 		  	ps.setString(2, cust.getCustomerName());
 		  	ps.setString(3, cust.getPassword());
-		  	ps.setString(4, cust.getAddress());
-		  	ps.setString(5, cust.getCity());
+		  	ps.setString(4, cust.getSsn());
+		  	ps.setString(5, cust.getPhone());
 		  	ps.setString(6, cust.getPostalCode());
-		  	ps.setString(7, cust.getSsn());
+		  	ps.setString(7, cust.getCity());
+		  	ps.setString(8, cust.getAddress());
+		  	
 		  	int res = ps.executeUpdate();
+		  	/*	CUSTOMER_ID,CUSTOMER_NAME,PASSWORD,SSN,PHONE,POSTALCODE,CITY,ADDRESS*/
 		  	
 		  	if(res==1) {
 		  		System.out.println("입력성공");
@@ -61,8 +65,36 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public List<CustomerDTO> selectCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("selectcustmoer 들어옴:");
+		List<CustomerDTO> list = new ArrayList<>();
+		try {
+			String  sql = CustomerSQL.LIST.toString();
+		PreparedStatement ps =	Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			CustomerDTO cust = null;
+			
+			while(rs.next()) {
+				System.out.println("while문을 탐");
+				cust = new CustomerDTO();
+			/*	CUSTOMER_ID,CUSTOMER_NAME,PASSWORD,SSN,PHONE,POSTALCODE,CITY,ADDRESS*/
+				cust.setAddress(rs.getString("ADDRESS"));
+				cust.setCity(rs.getString("CITY"));
+				cust.setCustomerID(rs.getString("CUSTOMER_ID"));
+				cust.setCustomerName(rs.getString("CUSTOMER_NAME"));
+				cust.setPassword(rs.getString("PASSWORD"));
+				cust.setPhone(rs.getString("PHONE"));
+				cust.setPostalCode(rs.getString("POSTALCODE"));
+				cust.setSsn(rs.getString("SSN"));
+				list.add(cust);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
@@ -92,6 +124,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 			dto.setCustomerName(rs.getString("CUSTOMER_NAME"));
 			dto.setPassword(rs.getString("PASSWORD"));
 			dto.setPostalCode(rs.getString("POSTALCODE"));
+			dto.setPhone(rs.getString("PHONE"));
 			dto.setSsn(rs.getString("SSN"));
 			
 			

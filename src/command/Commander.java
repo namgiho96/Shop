@@ -17,11 +17,11 @@ public class Commander {
 			cmd = new Command(request,response);
 			break;
 		case REGISTER:case SIGNUP:
-			System.out.println("COMMANDER:::::REGISTER:::: 로온다");
+			System.out.println("COMMANDER:::::REGISTER/SIGNUP:::: 로온다");
 			cmd = new CreateCommand(request, response);
 			break;
 		case ACCESS:case SIGNIN:
-			System.out.println("COMMANDER:::::EXIST:::: 로온다");
+			System.out.println("COMMANDER:::::ACCESS/SIGNIS:::: 로온다");
 			cmd = new ExistCommand(request, response);
 			break;
 		default:
