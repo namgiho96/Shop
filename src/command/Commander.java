@@ -24,6 +24,10 @@ public class Commander {
 			System.out.println("COMMANDER:::::ACCESS/SIGNIS:::: 로온다");
 			cmd = new ExistCommand(request, response);
 			break;
+			
+		case CUST_LIST:
+			System.out.println("COMMANDER::::LIST 로 온다");
+			cmd = new ListCommand(request, response);
 		default:
 			break;
 		}

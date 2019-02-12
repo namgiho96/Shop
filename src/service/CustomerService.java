@@ -3,12 +3,13 @@ package service;
 import java.util.List;
 
 import domain.CustomerDTO;
+import proxy.Pagination;
 
 public interface CustomerService {
 
 	public void addCustomer(CustomerDTO cust);
 
-	public List<CustomerDTO> bringCustomer();
+	public List<CustomerDTO> bringCustomer(Pagination page);
 
 	public List<CustomerDTO> retriveCustomers(String serachWord);
 

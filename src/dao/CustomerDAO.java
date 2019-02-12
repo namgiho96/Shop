@@ -3,11 +3,12 @@ package dao;
 import java.util.List;
 
 import domain.CustomerDTO;
+import proxy.Pagination;
 
 public interface CustomerDAO {
 	public void insertCustomer(CustomerDTO cust);
 
-	public List<CustomerDTO> selectCustomer();
+	public List<CustomerDTO> selectCustomer(Pagination page);
 
 	public List<CustomerDTO> selectCustomers(String serachWord);
 

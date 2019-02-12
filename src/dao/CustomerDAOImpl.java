@@ -10,6 +10,7 @@ import domain.CustomerDTO;
 import enums.CustomerSQL;
 import enums.Vendor;
 import factory.Databasefactory;
+import proxy.Pagination;
 
 public class CustomerDAOImpl implements CustomerDAO {
 	private static CustomerDAOImpl instance = new CustomerDAOImpl();
@@ -64,7 +65,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public List<CustomerDTO> selectCustomer() {
+	public List<CustomerDTO> selectCustomer(Pagination page) {
 		System.out.println("selectcustmoer 들어옴:");
 		List<CustomerDTO> list = new ArrayList<>();
 		try {
@@ -73,13 +74,18 @@ public class CustomerDAOImpl implements CustomerDAO {
 			.createDatabase(Vendor.ORACLE)
 			.getConnection()
 			.prepareStatement(sql);
+			System.out.println("startRow:: "+page.getStartRow());
+			System.out.println("EndRow:: "+page.getEndRow());
+		
+			ps.setString(1,page.getStartRow());
+			ps.setString(2,page.getEndRow());
+		
 			ResultSet rs = ps.executeQuery();
 			CustomerDTO cust = null;
-			
 			while(rs.next()) {
 				System.out.println("while문을 탐");
 				cust = new CustomerDTO();
-			/*	CUSTOMER_ID,CUSTOMER_NAME,PASSWORD,SSN,PHONE,POSTALCODE,CITY,ADDRESS*/
+				cust.setRownum(rs.getString("RNUM"));
 				cust.setAddress(rs.getString("ADDRESS"));
 				cust.setCity(rs.getString("CITY"));
 				cust.setCustomerID(rs.getString("CUSTOMER_ID"));
@@ -129,7 +135,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 			
 			
 		}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -139,8 +145,24 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public int countCustomer() {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		try {
+			String sql = CustomerSQL.COUNT.toString();
+		PreparedStatement ps = Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+			res = rs.getInt("count");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override

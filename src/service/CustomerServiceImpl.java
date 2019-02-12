@@ -5,6 +5,7 @@ import java.util.List;
 import dao.CustomerDAO;
 import dao.CustomerDAOImpl;
 import domain.CustomerDTO;
+import proxy.Pagination;
 
 public class CustomerServiceImpl implements CustomerService {
 
@@ -27,9 +28,9 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<CustomerDTO> bringCustomer() {
+	public List<CustomerDTO> bringCustomer(Pagination page) {
 		
-		return dao.selectCustomer();
+		return dao.selectCustomer(page);
 	}
 
 	@Override
@@ -46,8 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public int countCustomer() {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.countCustomer();
 	}
 
 	@Override

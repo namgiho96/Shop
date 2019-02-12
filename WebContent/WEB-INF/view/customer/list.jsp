@@ -26,8 +26,7 @@
       </tr>
      <c:forEach items="${list}" var="cust">
       <tr>
-      
-        <td>1</td>
+        <td>${cust.rownum}</td>
         <td>${cust.customerID}</td>
         <td>${cust.customerName}</td>
         <td>${cust.ssn}</td>
@@ -44,12 +43,21 @@
       <div class="pagination">
       <a href="#">&laquo;</a>
       <a href="#" class="active">1</a>
-      <a href="#">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
+      <a href="#" id="active2">2</a>
+      <a href="#" class="active3">3</a>
+      <a href="#" class="active4">4</a>
+      <a href="#" class="active5">5</a>
       <a href="#">&raquo;</a>
       </div>
     </div>
 </div>
+
 <jsp:include page="../home/bottom.jsp"/>
+<script>
+
+$('#active2').click(function(){
+	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=2&page_size=5');
+});
+
+
+</script>

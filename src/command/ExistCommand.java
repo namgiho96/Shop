@@ -6,11 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.media.sound.SimpleSoundbank;
-
 import domain.CustomerDTO;
 import domain.EmployeeDTO;
 import enums.Action;
+import proxy.Proxy;
 import service.CustomerServiceImpl;
 import service.EmployeeServiceImpl;
 
@@ -29,13 +28,12 @@ public class ExistCommand extends Command {
 			emp.setEmployeeID(request.getParameter("empno"));
 			emp.setName(request.getParameter("name"));
 			boolean exist = EmployeeServiceImpl.getInstance().existEmployee(emp);
-
 			if (exist) {
-				System.out.println("접근허용 ");
+				
+				
 				List<CustomerDTO> list = CustomerServiceImpl.getInstance()
-				.bringCustomer();
-				System.out.println("총 고객의 수: "+list.size());
-				System.out.println("가장 최근에 가입한 고객명:" +list.get(0).getCustomerName());
+				.bringCustomer(new Proxy().getPage());
+				
 				request.setAttribute("list",list);
 				
 			} else {
