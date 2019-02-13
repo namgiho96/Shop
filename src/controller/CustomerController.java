@@ -17,6 +17,7 @@ public class CustomerController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println((request.getServletPath().split("/")[1].replace(".do",""))+">>>>1.회원 컨트롤러 진입<<<<<<<");
+		System.out.println("-------1-------");
 		Receiver.init(request, response);
 		Carrier.forward(request, response);
 		

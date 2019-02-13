@@ -41,11 +41,15 @@
     <div style="height: 50px"></div>
     <div class="center">
       <div class="pagination">
+     <%--  <c:forEach begin="1" end="5" varStatus="status">
+       <a href="#" id="page_${status.count}" >${status.count}</a>
+      </c:forEach> --%>
+      
       <a href="#">&laquo;</a>
-      <a href="#" class="active">1</a>
+     <a href="#" id="active1">1</a>
       <a href="#" id="active2">2</a>
-      <a href="#" class="active3">3</a>
-      <a href="#" class="active4">4</a>
+      <a href="#" id="active3">3</a>
+      <a href="#" id="active4">4</a>
       <a href="#" class="active5">5</a>
       <a href="#">&raquo;</a>
       </div>
@@ -53,10 +57,17 @@
 </div>
 
 <jsp:include page="../home/bottom.jsp"/>
+
 <script>
+$('#active1').click(function(){
+	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=1&page_size=5');
+});
 
 $('#active2').click(function(){
 	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=2&page_size=5');
+});
+$('#active3').click(function(){
+	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=3&page_size=5');
 });
 
 

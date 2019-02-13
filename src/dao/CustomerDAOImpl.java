@@ -2,7 +2,6 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,9 @@ import domain.CustomerDTO;
 import enums.CustomerSQL;
 import enums.Vendor;
 import factory.Databasefactory;
+import proxy.PageProxy;
 import proxy.Pagination;
+import proxy.Proxy;
 
 public class CustomerDAOImpl implements CustomerDAO {
 	private static CustomerDAOImpl instance = new CustomerDAOImpl();
@@ -65,20 +66,24 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public List<CustomerDTO> selectCustomer(Pagination page) {
+	public List<CustomerDTO> selectCustomer(Proxy pxy) {
 		System.out.println("selectcustmoer 들어옴:");
 		List<CustomerDTO> list = new ArrayList<>();
 		try {
-			String  sql = CustomerSQL.LIST.toString();
+			Pagination page = ((PageProxy)pxy).getPage();
 		PreparedStatement ps =	Databasefactory
-			.createDatabase(Vendor.ORACLE)
-			.getConnection()
-			.prepareStatement(sql);
-			System.out.println("startRow:: "+page.getStartRow());
-			System.out.println("EndRow:: "+page.getEndRow());
+				.createDatabase(Vendor.ORACLE)
+				.getConnection()
+				.prepareStatement(CustomerSQL.LIST.toString());
 		
-			ps.setString(1,page.getStartRow());
-			ps.setString(2,page.getEndRow());
+		String StartRow = String.valueOf(page.getStartRow());
+		String endRow = String.valueOf(page.getEndRow());
+		
+		System.out.println("DAO_startRow:: "+StartRow);
+		System.out.println("DAO_EndRow:: "+endRow);
+		
+			ps.setLong(1,page.getStartRow());
+			ps.setLong(2,page.getEndRow());
 		
 			ResultSet rs = ps.executeQuery();
 			CustomerDTO cust = null;
@@ -104,7 +109,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public List<CustomerDTO> selectCustomers(String serachWord) {
+	public List<CustomerDTO> selectCustomers(Proxy pxy) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -144,17 +149,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public int countCustomer() {
+	public int countCustomer(Proxy pxy) {
 		int res = 0;
 		try {
-			String sql = CustomerSQL.COUNT.toString();
+			String sql = CustomerSQL.ROW_COUNT.toString();
 		PreparedStatement ps = Databasefactory
 			.createDatabase(Vendor.ORACLE)
 			.getConnection()
 			.prepareStatement(sql);
 			
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			if(rs.next()) {
 			res = rs.getInt("count");
 			}
 			

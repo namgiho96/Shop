@@ -1,22 +1,27 @@
 package command;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.CustomerDTO;
 import domain.EmployeeDTO;
 import enums.Action;
+import proxy.PageProxy;
+import proxy.Pagination;
 import proxy.Proxy;
+import proxy.RequestProxy;
 import service.CustomerServiceImpl;
 import service.EmployeeServiceImpl;
 
 public class ExistCommand extends Command {
 
-	public ExistCommand(HttpServletRequest request, HttpServletResponse response) {
-		super(request, response);
+	public ExistCommand(Map<String,Proxy> pxy) {
+		super(pxy);
+		RequestProxy req = (RequestProxy) pxy.get("req");
+		HttpServletRequest request = req.getRequest();
 		HttpSession session = request.getSession();
 		System.out.println("ExistCommand::들어옴");
 		System.out.println("CMD는 ::"+Action.valueOf(request.getParameter("cmd").toUpperCase()));
@@ -25,16 +30,20 @@ public class ExistCommand extends Command {
 		
 		case ACCESS:
 			EmployeeDTO emp = new EmployeeDTO();
+			
 			emp.setEmployeeID(request.getParameter("empno"));
 			emp.setName(request.getParameter("name"));
 			boolean exist = EmployeeServiceImpl.getInstance().existEmployee(emp);
 			if (exist) {
 				
-				
+				Proxy paging = new Pagination();
+				paging.carryOut(request);
+				Proxy pagepxy = new PageProxy();
+				pagepxy.carryOut(paging);
 				List<CustomerDTO> list = CustomerServiceImpl.getInstance()
-				.bringCustomer(new Proxy().getPage());
-				
+				.bringCustomer(pagepxy);
 				request.setAttribute("list",list);
+				System.out.println("");
 				
 			} else {
 				System.out.println("접근 불가");

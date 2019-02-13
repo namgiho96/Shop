@@ -3,19 +3,19 @@ package service;
 import java.util.List;
 
 import domain.CustomerDTO;
-import proxy.Pagination;
+import proxy.Proxy;
 
 public interface CustomerService {
 
 	public void addCustomer(CustomerDTO cust);
 
-	public List<CustomerDTO> bringCustomer(Pagination page);
+	public List<CustomerDTO> bringCustomer(Proxy pxy);
 
-	public List<CustomerDTO> retriveCustomers(String serachWord);
+	public List<CustomerDTO> retriveCustomers(Proxy pxy);
 
 	public CustomerDTO retriveCustomer(CustomerDTO cust);
 
-	public int countCustomer();
+	public int countCustomer(Proxy pxy);
 
 	public boolean existsCustomerID(CustomerDTO cust);
 

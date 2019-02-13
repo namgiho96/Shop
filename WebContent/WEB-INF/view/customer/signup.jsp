@@ -11,7 +11,6 @@
 
 <div class="grid-item" id="content">
 <form id="form" name="form" >
-	CUSTOMER_ID아이디,CUSTOMER_NAME이름,PASSWORD비밀번호,SSN생년월일,PHONE핸드폰 번호,POSTALCODE우편번호,CITY지정주소,ADDRESS상세주소,
 	
 	<div class="input-group">
   		<span class="input-group-addon" id="basic-addon1">아이디</span>

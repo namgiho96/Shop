@@ -2,38 +2,50 @@ package proxy;
 
 import javax.servlet.http.HttpServletRequest;
 
-import command.Receiver;
 import lombok.Data;
 import service.CustomerServiceImpl;
 
 @Data
-public class Pagination implements capable {
-	private String pageNum, pageSize, blockSize, startRow, endRow, startpage, endpage, prevBlock, nextBlock;
-	private int totalCount;
+public class Pagination implements Proxy {
+
+	private int pageNum, pageSize, blockSize, startRow, endRow, startpage, endpage, prevBlock, nextBlock, totalCount;
+
 	private boolean existPrev, existNext;
 
 	@Override
-	public void carryOut() {
-		// 디폴트값 만드는 방법
-		HttpServletRequest request = Receiver.cmd.getRequest();
+	public void carryOut(Object o) {
 
-		this.pageNum = (request.getParameter("page_num") == null) ? "1" : request.getParameter("page_num");
+		HttpServletRequest request = (HttpServletRequest) o;
+
+		String _pageNum = request.getParameter("page_num");
+		pageNum = (request.getParameter("page_num") == null) ? 1 : Integer.parseInt(_pageNum);
 		System.out.println("페이지네이션 페이지넘" + pageNum);
-		this.pageSize = (request.getParameter("page_size") == null) ? "5" : request.getParameter("page_size");
+
+		String _pageSize = request.getParameter("page_size");
+		pageSize = (request.getParameter("page_size") == null) ? 5 : Integer.parseInt(_pageSize);
 		System.out.println("페이지네이션 페이지넘" + pageSize);
-		this.totalCount = CustomerServiceImpl.getInstance().countCustomer();
+		
+		String _blockSize = request.getParameter("block_Size");
+		blockSize = (request.getParameter("block_Size") == null)? 5 : Integer.parseInt(_blockSize);
 
-		System.out.println("TOTAL" + this.totalCount);
+		totalCount = CustomerServiceImpl.getInstance().countCustomer(null);
+		System.out.println("전체 카운터" + totalCount);
 
-		this.startRow = String.valueOf(totalCount - (Integer.parseInt(pageSize) * Integer.parseInt(pageNum)) + 1);
-		this.endRow = String.valueOf(totalCount - (Integer.parseInt(pageSize) * (Integer.parseInt(pageNum) - 1)));
+		int pageCount = totalCount / pageSize;
+		System.out.println("총페이지 수:"+pageCount);
+		
+		startRow = (pageNum - 1) * pageSize + 1;
+		System.out.println("스타트 로우:"+startRow);
+		
+		endRow = (totalCount>pageNum*pageSize)?pageNum*pageSize:totalCount;
+		System.out.println("END로우:"+endRow);
+		
 
 		System.out.println("start ROW::" + startRow);
 		System.out.println("END ROW::" + endRow);
 
-		// total count
-		// pagenum
-		// start
+	
 
 	}
+
 }
