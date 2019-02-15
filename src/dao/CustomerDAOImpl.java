@@ -3,7 +3,9 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import domain.CustomerDTO;
 import enums.CustomerSQL;
@@ -71,6 +73,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		List<CustomerDTO> list = new ArrayList<>();
 		try {
 			Pagination page = ((PageProxy)pxy).getPage();
+			System.out.println("DAOIMPL ::"+page);
 		PreparedStatement ps =	Databasefactory
 				.createDatabase(Vendor.ORACLE)
 				.getConnection()
@@ -202,6 +205,66 @@ public class CustomerDAOImpl implements CustomerDAO {
 	public void deleteCustomer(CustomerDTO cust) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Map<String, Object> SelectPhone(Proxy pxy) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		 try {
+		PreparedStatement ps =	Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(CustomerSQL.PHONE_LIST.toString());
+		ResultSet rs =	ps.executeQuery();
+		CustomerDTO cust = null;
+		while(rs.next()) {
+			cust = new CustomerDTO();
+			String entry = rs.getString("CUSTOMER_ID");
+			cust.setCustomerID(rs.getString("CUSTOMER_ID"));
+			cust.setCustomerName(rs.getString("CUSTOMER_NAME"));
+			cust.setPhone(rs.getString("PHONE"));
+			
+			map.put(entry,cust);
+			
+			System.out.println("이름"+map.put("name",rs.getObject("CUSTOMER_NAME")));
+			System.out.println("전화번호"+map.put("phone",rs.getObject("PHONE")));
+		}
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return map;
+	}
+
+	@Override
+	public CustomerDTO retriveCustomer(CustomerDTO cust) {
+		CustomerDTO cus = new CustomerDTO();
+		try {
+			
+		PreparedStatement ps =	Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(CustomerSQL.CUST_RETRIEVE.toString());
+			ps.setString(1,cust.getCustomerID());
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cus.setAddress(rs.getString("ADDRESS"));
+				cus.setCity(rs.getString("CITY"));
+				cus.setCustomerID(rs.getString("CUSTOMER_ID"));
+				cus.setCustomerName(rs.getString("CUSTOMER_NAME"));
+				cus.setPhone(rs.getString("PHONE"));
+				cus.setPostalCode(rs.getString("POSTALCODE"));
+				cus.setSsn(rs.getString("SSN"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return cus;
 	}
 
 }

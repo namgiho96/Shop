@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import domain.CustomerDTO;
 import proxy.Proxy;
@@ -22,4 +23,6 @@ public interface CustomerService {
 	public void modfyCustomer(CustomerDTO cust);
 
 	public void removeCustomer(CustomerDTO cust);
+	
+	public Map<String,Object> retrievePhone(Proxy pxy);
 }

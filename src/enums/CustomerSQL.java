@@ -3,7 +3,7 @@ package enums;
 
 public enum CustomerSQL {
 
-	SIGNIN, SIGNUP,LIST,ROW_COUNT;
+	SIGNIN, SIGNUP,LIST,ROW_COUNT,PHONE_LIST,CUST_RETRIEVE;
 
 	@Override
 	public String toString() {
@@ -28,6 +28,14 @@ public enum CustomerSQL {
 		case ROW_COUNT:
 			query.append("	SELECT COUNT(*) count\n" + 
 					"	FROM CUSTOMERS");
+			break;
+		case PHONE_LIST:
+			query.append("SELECT CUSTOMER_NAME,PHONE,CUSTOMER_ID \n" + 
+					"FROM CUSTOMERS C");
+			break;
+		case CUST_RETRIEVE:
+			query.append("SELECT CUSTOMER_ID,CUSTOMER_NAME,SSN,PHONE,POSTALCODE,CITY,ADDRESS \n" + 
+					"FROM CUSTOMERS WHERE CUSTOMER_ID LIKE ?");
 		default:
 			break;
 		}

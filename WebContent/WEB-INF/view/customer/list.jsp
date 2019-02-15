@@ -8,9 +8,9 @@
     <jsp:include page="../employee/nav.jsp"/>
 </div>
 <div class="grid-item" id="side_menu">
+											</div>
     <h1><font style="font-size: 30px">고객 목록</font>
     </h1>
-</div>
 <div class="grid-item" id="content">
     <table id="cust_tab">
       <tr>
@@ -28,7 +28,7 @@
       <tr>
         <td>${cust.rownum}</td>
         <td>${cust.customerID}</td>
-        <td>${cust.customerName}</td>
+        <td> <a href="${ctx}/customer.do?cmd=cust_retrieve&page=detail&customerID=${cust.customerID}">${cust.customerName}</a></td>
         <td>${cust.ssn}</td>
         <td>남</td>
         <td>${cust.phone }</td>
@@ -41,34 +41,35 @@
     <div style="height: 50px"></div>
     <div class="center">
       <div class="pagination">
-     <%--  <c:forEach begin="1" end="5" varStatus="status">
-       <a href="#" id="page_${status.count}" >${status.count}</a>
-      </c:forEach> --%>
       
-      <a href="#">&laquo;</a>
-     <a href="#" id="active1">1</a>
-      <a href="#" id="active2">2</a>
-      <a href="#" id="active3">3</a>
-      <a href="#" id="active4">4</a>
-      <a href="#" class="active5">5</a>
-      <a href="#">&raquo;</a>
+      <c:if test="${pagination.existPrev}">
+      	<a href='${ctx}/customer.do?cmd=cust_list&page=list&page_num=${pagination.prevBlock}'>&laquo;</a>
+      </c:if>
+      
+      <c:forEach begin="${pagination.startpage}" end="${pagination.endpage}" varStatus="status">
+      
+      <c:choose>
+      		<c:when test="${pagination.pageNum eq status.index}">
+      			     <a href="#"class="page active">${status.index}</a>
+      		</c:when>
+      		<c:otherwise>
+      				<a href="#"class="page">${status.index}</a>
+      		</c:otherwise>
+      </c:choose>
+      
+      </c:forEach>
+      
+      <c:if test="${pagination.existNext}">
+      	<a href='${ctx}/customer.do?cmd=cust_list&page=list&page_num=${pagination.nextBlock}'>&raquo;</a>
+      </c:if>
+      
       </div>
     </div>
-</div>
-
+     </div>
 <jsp:include page="../home/bottom.jsp"/>
 
 <script>
-$('#active1').click(function(){
-	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=1&page_size=5');
+$('.page').click(function(){
+		location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num='+$(this).text());
 });
-
-$('#active2').click(function(){
-	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=2&page_size=5');
-});
-$('#active3').click(function(){
-	location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num=3&page_size=5');
-});
-
-
 </script>

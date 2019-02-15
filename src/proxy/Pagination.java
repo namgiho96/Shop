@@ -24,27 +24,43 @@ public class Pagination implements Proxy {
 		String _pageSize = request.getParameter("page_size");
 		pageSize = (request.getParameter("page_size") == null) ? 5 : Integer.parseInt(_pageSize);
 		System.out.println("페이지네이션 페이지넘" + pageSize);
-		
+
 		String _blockSize = request.getParameter("block_Size");
-		blockSize = (request.getParameter("block_Size") == null)? 5 : Integer.parseInt(_blockSize);
+		blockSize = (request.getParameter("block_Size") == null) ? 5 : Integer.parseInt(_blockSize);
 
 		totalCount = CustomerServiceImpl.getInstance().countCustomer(null);
-		System.out.println("전체 카운터" + totalCount);
 
-		int pageCount = totalCount / pageSize;
-		System.out.println("총페이지 수:"+pageCount);
-		
+		int nmg = totalCount % pageSize;
+		int pageCount = (nmg == 0) ? totalCount / pageSize : totalCount / pageSize + 1;
+
+		System.out.println("총페이지 수:" + pageCount);
+
 		startRow = (pageNum - 1) * pageSize + 1;
-		System.out.println("스타트 로우:"+startRow);
-		
-		endRow = (totalCount>pageNum*pageSize)?pageNum*pageSize:totalCount;
-		System.out.println("END로우:"+endRow);
-		
+		System.out.println("스타트 로우:" + startRow);
 
-		System.out.println("start ROW::" + startRow);
-		System.out.println("END ROW::" + endRow);
+		endRow = (totalCount > pageNum * pageSize) ? pageNum * pageSize : totalCount;
+		System.out.println("END로우:" + endRow);
 
-	
+		int blocknum = (pageNum - 1) / blockSize;
+		endpage = startpage + (blockSize - 1);
+
+		if (existPrev) {
+			startpage = blocknum * blockSize + 1;
+		} else {
+			startpage = 1;
+		}
+		
+		if(endpage>pageCount) {
+			endpage = pageCount;
+        }
+
+		existPrev = (startpage - pageSize) > 0;
+		existNext = (startpage + pageSize) <= pageCount;
+		prevBlock = startpage - pageSize;
+		nextBlock = startpage + pageSize;
+
+		System.out.println("프리브블록: " + prevBlock);
+		System.out.println("넥스트블록: " + nextBlock);
 
 	}
 

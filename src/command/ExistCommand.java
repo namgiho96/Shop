@@ -43,6 +43,7 @@ public class ExistCommand extends Command {
 				List<CustomerDTO> list = CustomerServiceImpl.getInstance()
 				.bringCustomer(pagepxy);
 				request.setAttribute("list",list);
+				request.setAttribute("pagination",paging);
 				System.out.println("");
 				
 			} else {

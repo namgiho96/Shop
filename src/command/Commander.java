@@ -34,6 +34,10 @@ public class Commander {
 		case CUST_LIST:
 			System.out.println("COMMANDER::::LIST 로 온다");
 			cmd = new ListCommand(pxy);
+			break;
+		case CUST_RETRIEVE:
+			System.out.println("CUST_RETRIEVE:: 들어옴");
+			cmd = new RetrieveCommand(pxy);
 		default:
 			break;
 		}
