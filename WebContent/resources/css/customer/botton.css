@@ -1,0 +1,12 @@
+@charset "UTF-8"
+
+
+.botton_1{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.botton_2{
+    grid-column-start: 2;
+    grid-column-end: 4;
+}

@@ -6,6 +6,7 @@
 #content{
     grid-column-start: 2;
     grid-column-end: 5;
+        padding: 10px;
 }
 
 #item_2{

@@ -3,8 +3,6 @@ import lombok.Data;
 public @Data class CustomerDTO {
 	
 	private String 	
-					startRow,
-					endRow,
 					rownum,
 					customerID,
 					customerName,
@@ -14,8 +12,7 @@ public @Data class CustomerDTO {
 					phone,
 					city, 
 					address, 
-					postalCode,
-					count
+					postalCode
 					;
 
 

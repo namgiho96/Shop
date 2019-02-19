@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,15 +12,19 @@ import domain.CustomerDTO;
 import enums.CustomerSQL;
 import enums.Vendor;
 import factory.Databasefactory;
+import proxy.ImageProxy;
 import proxy.PageProxy;
 import proxy.Pagination;
 import proxy.Proxy;
 
 public class CustomerDAOImpl implements CustomerDAO {
 	private static CustomerDAOImpl instance = new CustomerDAOImpl();
-
+	Connection conn;
 	private CustomerDAOImpl() {
-		dao = CustomerDAOImpl.getInstance();
+		
+		conn = Databasefactory
+		.createDatabase(Vendor.ORACLE)
+		.getConnection();
 	}
 
 	public static CustomerDAOImpl getInstance() {
@@ -34,7 +39,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 		
 		
 		try {
-			
 			String sql = CustomerSQL.SIGNUP.toString();
 			PreparedStatement ps = Databasefactory
 			.createDatabase(Vendor.ORACLE)
@@ -49,22 +53,16 @@ public class CustomerDAOImpl implements CustomerDAO {
 		  	ps.setString(6, cust.getPostalCode());
 		  	ps.setString(7, cust.getCity());
 		  	ps.setString(8, cust.getAddress());
-		  	
 		  	int res = ps.executeUpdate();
-		  	/*	CUSTOMER_ID,CUSTOMER_NAME,PASSWORD,SSN,PHONE,POSTALCODE,CITY,ADDRESS*/
 		  	
 		  	if(res==1) {
 		  		System.out.println("입력성공");
 		  	}else {
 		  		System.out.println("입력실패");
 		  	}
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
 	}
 
 	@Override
@@ -197,8 +195,26 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 	@Override
 	public void updateCustomer(CustomerDTO cust) {
-		// TODO Auto-generated method stub
-
+		
+		try {
+			
+		PreparedStatement ps =	Databasefactory
+			.createDatabase(Vendor.ORACLE)
+			.getConnection()
+			.prepareStatement(CustomerSQL.CUST_UPDATE.toString());
+			ps.setString(1,cust.getCustomerID());
+			ps.setString(2,cust.getPassword());
+			ps.setString(3,cust.getPhone());
+			ps.setString(4,cust.getCity());
+			ps.setString(5,cust.getAddress());
+			ps.setString(6,cust.getPostalCode());
+			 ps.executeUpdate();
+			 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
@@ -224,9 +240,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 			cust.setCustomerID(rs.getString("CUSTOMER_ID"));
 			cust.setCustomerName(rs.getString("CUSTOMER_NAME"));
 			cust.setPhone(rs.getString("PHONE"));
-			
 			map.put(entry,cust);
-			
 			System.out.println("이름"+map.put("name",rs.getObject("CUSTOMER_NAME")));
 			System.out.println("전화번호"+map.put("phone",rs.getObject("PHONE")));
 		}
@@ -260,11 +274,36 @@ public class CustomerDAOImpl implements CustomerDAO {
 				cus.setPhone(rs.getString("PHONE"));
 				cus.setPostalCode(rs.getString("POSTALCODE"));
 				cus.setSsn(rs.getString("SSN"));
+				cus.setPassword(rs.getString("PASSWORD"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 		return cus;
+	}
+
+	@Override
+	public CustomerDTO selectProfile(Proxy pxy) {
+		CustomerDTO cust = new CustomerDTO();
+	try {
+		String sql = "";
+		ImageProxy ipxy =  (ImageProxy) pxy;
+		ImageDAOImpl.getInstens().insertImage(((ImageProxy)pxy).getImg());
+		String imgSeq = ImageDAOImpl.getInstens().lastImageSeq();
+		
+		 sql = "UPDATE CUSTOMERS SET PHOTO = ? WHERE CUSTOMER_ID";
+		 
+		PreparedStatement ps =	conn.prepareStatement(sql);
+			ps.setString(1,imgSeq);
+			ps.setString(2,ipxy.getImg().getOwner());
+
+			cust.setCustomerID(ipxy.getImg().getOwner());
+			cust = selectCustomer(cust);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return cust;
 	}
 
 }

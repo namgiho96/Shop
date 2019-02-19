@@ -17,5 +17,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="C:/Users/hanbit/java_basic/jee_workspace/cos-26Dec2008/lib/cos.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -21,6 +21,8 @@ public interface CustomerService {
 	public boolean existsCustomerID(CustomerDTO cust);
 
 	public void modfyCustomer(CustomerDTO cust);
+	
+	public CustomerDTO fileUpload(Proxy pxy);
 
 	public void removeCustomer(CustomerDTO cust);
 	

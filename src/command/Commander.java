@@ -40,7 +40,18 @@ public class Commander {
 			cmd = new RetrieveCommand(pxy);
 		default:
 			break;
+			
+		case CUST_UPDATE:
+			System.out.println("CUST_UPDATE::: 들어온다");
+			cmd = new UpdateCommand(pxy);
+			break;
+			
+		case CUST_FILE_UPLOAD:
+			System.out.println("업로드 들어옴");
+			cmd = new FileCommand(pxy);
+			break;
 		}
+		
 		System.out.println("커맨더 내: "+Receiver.cmd.getView());
 		return cmd;
 

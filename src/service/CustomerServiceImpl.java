@@ -36,7 +36,6 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<CustomerDTO> retriveCustomers(Proxy pxy) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -57,13 +56,11 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void modfyCustomer(CustomerDTO cust) {
-		// TODO Auto-generated method stub
-
+		dao.updateCustomer(cust);
 	}
 
 	@Override
 	public void removeCustomer(CustomerDTO cust) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -71,6 +68,11 @@ public class CustomerServiceImpl implements CustomerService {
 	public Map<String, Object> retrievePhone(Proxy pxy) {
 		
 		return dao.SelectPhone(pxy);
+	}
+
+	@Override
+	public CustomerDTO fileUpload(Proxy pxy) {
+		return dao.selectProfile(pxy);
 	}
 
 }

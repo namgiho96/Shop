@@ -1,10 +1,6 @@
-/enums/
-/factory/
-/controller/
 /command/
+/enums/
 /domain/
-/dao/
-/service/
-/sql/
 /proxy/
-/iterator/
+/service/
+/dao/

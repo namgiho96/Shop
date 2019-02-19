@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import domain.CustomerDTO;
+import domain.ImageDTO;
 import proxy.PageProxy;
 import proxy.Pagination;
 import proxy.Proxy;
@@ -23,10 +24,10 @@ public class RetrieveCommand extends Command  {
 		pagepxy.carryOut(paging);
 		CustomerDTO cust = new CustomerDTO();
 		cust.setCustomerID(request.getParameter("customerID"));
-			
-		
+		ImageDTO img = new ImageDTO();
 		cust = CustomerServiceImpl.getInstance().retriveCustomer(cust);
 		request.setAttribute("cust",cust);
+		request.setAttribute("img",img);
 
 	}
 }

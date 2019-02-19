@@ -23,7 +23,10 @@ public interface CustomerDAO {
 
 	public void updateCustomer(CustomerDTO cust);
 
+	public CustomerDTO selectProfile(Proxy pxy);
+
 	public void deleteCustomer(CustomerDTO cust);
 
 	public Map<String, Object> SelectPhone(Proxy pxy);
+
 }
