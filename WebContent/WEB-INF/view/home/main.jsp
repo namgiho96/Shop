@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="top.jsp"/>
 <link rel="stylesheet" href="${css}/home/main.css" />
-    <div class="grid-item" id="left">
-    	고객 전용<br /><br />
+    <div class="grid-item" id="left">고객 전용<br /><br />
     	<a href="#" id="cust_join" >회원가입</a><br />
     	<a href="#" id="cust_login" >로 그 인</a>
     </div>
@@ -15,16 +14,18 @@
 <jsp:include page="bottom.jsp"/>  
 
 <script>
-$('#emp_register').click(function(){
+$('#emp_register').click(()=>{
 	location.assign('employee.do?cmd=move&page=register');
 });
-$('#emp_access').click(function(){
+
+$('#emp_access').click(()=>{
 	location.assign('employee.do?cmd=move&page=access');
 });
-$('#cust_join').click(function(){
+
+$('#cust_join').click(()=>{
 	location.assign('customer.do?cmd=move&page=signup')
 });
-$('#cust_login').click(function(){
+$('#cust_login').click(()=>{
 	location.assign('customer.do?cmd=move&page=signin')
 });
 

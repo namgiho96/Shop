@@ -9,7 +9,7 @@
 <form id="form" name="form" >
 	<div class="grid-container">
 	    <div class="grid-item" id="item_1">ID</div>
-	    <div class="grid-item" id="item_2"><input type="text" id="custmerID" name="custmerID"></div>
+	    <div class="grid-item" id="item_2"><input type="text" id="customerID" name="customerID"></div>
 	    <div class="grid-item" id="item_3">PASSWORD</div>
 	    <div class="grid-item" id="item_4"><input type="text" id=password name="password"></div>
 	    
@@ -23,11 +23,11 @@
 </div>
 <jsp:include page="../home/bottom.jsp"/>
 <script>
-$('#confirm_btn').click(function(){
+$('#confirm_btn').click(()=>{
 	var empno = $('#custmerID').val();
 	var name = $('#password').val();
 	$('#form')
-	.attr('action', '${ctx}/customer.do')
+	.attr('action','${ctx}/customer.do')
 	.submit();
 });
 </script>

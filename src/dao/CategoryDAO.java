@@ -3,11 +3,12 @@ package dao;
 import java.util.List;
 
 import domain.CategoryDTO;
+import proxy.Proxy;
 
 public interface CategoryDAO {
 	public void insertcategory(CategoryDTO cate);
 
-	public List<CategoryDTO> selectcreategory();
+	public List<CategoryDTO> selectcreategory(Proxy pxy);
 
 	public List<CategoryDTO> selectcreategorys(String serachWord);
 
@@ -20,4 +21,5 @@ public interface CategoryDAO {
 	public void updatacategory(CategoryDTO cate);
 
 	public void deletecategory(CategoryDTO cate);
+
 }

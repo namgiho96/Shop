@@ -53,7 +53,6 @@ public class ImageProxy implements Proxy{
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

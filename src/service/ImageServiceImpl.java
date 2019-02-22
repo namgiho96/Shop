@@ -25,16 +25,15 @@ public class ImageServiceImpl  implements ImageService{
 	
 	@Override
 	public void addImage(ImageDTO img) {
+		dao.insertImage(img);
 	}
 	
 	
 	
 	
 	@Override
-	public List<ImageDTO> imageList(Proxy pxy) {
-		List<ImageDTO> list = new ArrayList<>();
-		
-		return list;
+	public ImageDTO selectimage(ImageDTO img) {
+		return dao.selectimage(img);
 	}
 
 	@Override

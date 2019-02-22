@@ -3,14 +3,6 @@
    grid-column-start: 1;
    grid-column-end: 5;
 }
-#side_menu{
-   grid-column-start: 1;
-   grid-column-end: 2;
-}
-#content{
-   grid-column-start: 2;
-   grid-column-end: 5;
-}
 #cust_tab {
  font-family: arial, sans-serif;
  border-collapse: collapse;
@@ -47,3 +39,6 @@
 .pagination a:hover:not(.active) {
    background-color: #ddd;
 }
+
+
+

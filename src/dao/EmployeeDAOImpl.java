@@ -36,12 +36,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             pstmt.setString(1, emp.getManager());
             pstmt.setString(2, emp.getName());
             pstmt.setString(3, emp.getBirthDate());
-            pstmt.setString(4, emp.getPhoto());
-            pstmt.setString(5, emp.getNotes());
-            int rs = pstmt.executeUpdate();
-            System.out.println((rs==1)?"입력성공":"입력실패");
+            pstmt.setString(4, emp.getNotes());
+            pstmt.executeUpdate();
+            
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

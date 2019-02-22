@@ -9,7 +9,7 @@ public interface ImageDAO {
 
 	public void insertImage(ImageDTO img);
 
-	public List<ImageDTO> selectimageList(Proxy pxy);
+	public ImageDTO selectimage(ImageDTO img);
 
 	public List<ImageDTO> selectimageLists(Proxy pxy);
 

@@ -8,7 +8,7 @@ import proxy.Proxy;
 public interface ImageService {
 	public void addImage(ImageDTO img);
 
-	public List<ImageDTO> imageList(Proxy pxy);
+	public ImageDTO selectimage(ImageDTO img);
 
 	public List<ImageDTO> imageLists(Proxy pxy);
 

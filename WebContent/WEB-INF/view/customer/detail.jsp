@@ -12,7 +12,6 @@
 <div class="grid-item" id="nav">
     <jsp:include page="../employee/nav.jsp"/>
 </div>
-
 <form id="file_form">
 <div class="grid-item" id="side_menu" >
 <div class="myphotoin">
@@ -36,14 +35,14 @@
  
 </div>
    <div class="botton_1">
- 	<button type="button" id="photo_btn" class="btn">사진수정</button>
+ 	<button type="button" id="updata_btn" class="btn">정보수정</button>
  </div>
 
  <div class="botton_2">
- 	<button type="button" id="updata_btn" class="btn">수정</button>
+ 	<button type="button" id="delete_btn" class="btn">회원탈퇴</button>
  </div>
 <script>
-$('#file_upload_btn').click(function(){
+$('#file_upload_btn').click(()=>{
 	alert('파일업로드 버튼클릭!!')
 	$('#file_form')
  	.attr('method','post')
@@ -52,8 +51,12 @@ $('#file_upload_btn').click(function(){
 	.submit(); 
 });
 
-$('#updata_btn').click(function(){
+$('#updata_btn').click(()=>{
 	location.assign("${ctx}/customer.do?cmd=cust_retrieve&page=update&customerID=${cust.customerID}");
+});
+
+$('#delete_btn').click(function(){
+	location.assign("${ctx}/customer.do?cmd=cust_remove&dir=home&page=main&customerID=${cust.customerID}");
 });
 </script>
 

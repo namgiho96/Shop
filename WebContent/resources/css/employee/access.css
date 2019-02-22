@@ -6,12 +6,19 @@
 #content{
     grid-column-start: 2;
     grid-column-end: 5;
-        padding: 10px;
+    padding: 10px;
 }
-
+#item_1{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
 #item_2{
     grid-column-start: 2;
     grid-column-end: 5;
+}
+#item_3{
+    grid-column-start: 1;
+    grid-column-end: 2;
 }
 #item_4{
     grid-column-start: 2;

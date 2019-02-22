@@ -10,7 +10,7 @@
 </div>
 
 <div class="grid-item" id="content">
-<form id="form" name="form" >
+<form id="form">
 	
 	<div class="input-group">
   		<span class="input-group-addon" id="basic-addon1">아이디</span>
@@ -81,10 +81,11 @@
 
 <jsp:include page="../home/bottom.jsp"/>
 <script>
-$('#confirm_btn').click(function(){
+$('#confirm_btn').click(()=>{
 	var name = $('#name').val();
 	var custmerID = $('#custmerID').val();
 	var password = $('#password').val();
+	var phone = $('#phone').val();
 	var address = $('#address').val();
 	var city = $('#city').val();
 	var postalCode = $('#postalCode').val();

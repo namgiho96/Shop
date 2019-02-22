@@ -61,7 +61,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void removeCustomer(CustomerDTO cust) {
-
+		dao.deleteCustomer(cust);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public CustomerDTO fileUpload(Proxy pxy) {
+	public Map<String, Object> fileUpload(Proxy pxy) {
 		return dao.selectProfile(pxy);
 	}
 

@@ -3,4 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<div class="grid-item" id="footer">주소</div>
+   <div class="grid-item" id="footer">주소</div>
+</div> 
+</body>
+</html>

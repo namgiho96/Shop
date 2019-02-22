@@ -1,15 +1,4 @@
 package enums;
-/*
- *  employee  
- *  employeeID,
- *  manager
- *  ,name
- *  ,BirthDate
- *  ,photo
- *  ,notes;
- *  
- *  
- * */
 public enum EmployeeSQL {
 	REGISTER,ACCESS;
 	
@@ -18,7 +7,12 @@ public enum EmployeeSQL {
 		StringBuffer query = new StringBuffer();
 		switch (this) {
 		case REGISTER:
-			query.append("INSERT INTO EMPLOYEES(EMPLOYEE_ID,MANAGER,NAME,BIRTH_DATE,PHOTO,NOTES) VALUES(EMP_SEQ.NEXTVAL, ?, ?, ?, ?, ?)");
+			query.append(" INSERT INTO EMPLOYEES(EMPLOYEE_ID,\n" + 
+					"					MANAGER,\n" + 
+					"					NAME,\n" + 
+					"					BIRTH_DATE,\n" + 
+					"					PHOTO,\n" + 
+					"					NOTES) VALUES(EMP_SEQ.NEXTVAL,?,?,?,'1036',?)");
 			break;
 		case ACCESS:
 			query.append("SELECT NAME \n" + 

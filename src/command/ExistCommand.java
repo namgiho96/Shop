@@ -44,7 +44,6 @@ public class ExistCommand extends Command {
 				.bringCustomer(pagepxy);
 				request.setAttribute("list",list);
 				request.setAttribute("pagination",paging);
-				System.out.println("");
 				
 			} else {
 				System.out.println("접근 불가");
@@ -56,23 +55,24 @@ public class ExistCommand extends Command {
 		case SIGNIN:
 			
 			CustomerDTO cust = new CustomerDTO();
-			cust.setCustomerID(request.getParameter("custmerID"));
+			cust.setCustomerID(request.getParameter("customerID"));
 			cust.setPassword(request.getParameter("password"));
 			cust = CustomerServiceImpl.getInstance().retriveCustomer(cust);
 			
 			if(cust != null) {
-				System.out.println("접근허용");
+				System.out.println("로그인성공");
 				session.setAttribute("customer",cust);
 			}else {
+				System.out.println("로그인실패");
 				super.setDomain("customer");
 				super.setPage("signin");
 				super.execute();
+				System.out.println("주소주소::"+super.getView());
 			}
-			
+			break;
 		default:
 			break;
 		}
-
 		System.out.println("ExistCommand 내부: " + super.getView());
 
 	}

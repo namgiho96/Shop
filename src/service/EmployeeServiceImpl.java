@@ -30,19 +30,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public List<EmployeeDTO> retriveEmployees(String serachWord) {
-		// TODO Auto-generated method stub
 		return dao.selectEmployees(serachWord);
 	}
 
 	@Override
 	public EmployeeDTO retriveEmployee(String serachWord) {
-		// TODO Auto-generated method stub
 		return dao.selectEmployee(serachWord);
 	}
 
 	@Override
 	public int countEmplotees() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

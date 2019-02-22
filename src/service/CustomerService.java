@@ -22,7 +22,7 @@ public interface CustomerService {
 
 	public void modfyCustomer(CustomerDTO cust);
 	
-	public CustomerDTO fileUpload(Proxy pxy);
+	public Map<String, Object> fileUpload(Proxy pxy);
 
 	public void removeCustomer(CustomerDTO cust);
 	

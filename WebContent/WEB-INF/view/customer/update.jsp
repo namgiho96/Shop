@@ -36,13 +36,13 @@
  	<button type="button" id="cancel_btn" class="btn btn-success">취소</button>
  </div>
 <script>
-$('#confirm_btn').click(function(){
+$('#confirm_btn').click(()=>{
 	var form = $('#form');
 	form.attr('action','${ctx}/customer.do');
 	form.attr('method','post');
 	form.submit();
 });
-$('#cancel_btn').click(function(){
+$('#cancel_btn').click(()=>{
 	alert('취소버튼 클릭');
 });
 </script>
