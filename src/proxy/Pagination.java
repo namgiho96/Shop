@@ -23,7 +23,7 @@ public class Pagination implements Proxy {
 
 		String _pageSize = request.getParameter("page_size");
 		pageSize = (request.getParameter("page_size") == null) ? 5 : Integer.parseInt(_pageSize);
-		System.out.println("페이지네이션 페이지넘" + pageSize);
+		System.out.println("페이지네이션 페이지사이즈" + pageSize);
 
 		String _blockSize = request.getParameter("block_Size");
 		blockSize = (request.getParameter("block_Size") == null) ? 5 : Integer.parseInt(_blockSize);

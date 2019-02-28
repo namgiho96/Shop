@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
    <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+   
 <jsp:include page="../home/top.jsp"/>
+
 <link rel="stylesheet" href="${css}/customer/list.css" />
 <link rel="stylesheet" href="${css}/home/main.css" />
 <link rel="stylesheet" href="${css}/employee/nav.css" />    
@@ -20,9 +22,9 @@
 <div class="grid-item" id="side_menu">
 	사이드 메뉴입니다.
 </div>
+
 <div class="grid-item" id="content_list">
-    <h1><font style="font-size: 30px">고객 목록</font>
-    </h1>
+    <h1><font style="font-size: 30px">고객 목록</font></h1>
 	<div class="grid-item" id="content">
 	    <table id="cust_tab">
 	      <tr>
@@ -43,14 +45,13 @@
 	        <td> <a href="${ctx}/customer.do?cmd=cust_retrieve&page=detail&customerID=${cust.customerID}">${cust.customerName}</a></td>
 	        <td>${cust.ssn}</td>
 	        <td>남</td>
-	        <td>${cust.phone }</td>
+	        <td>${cust.phone}</td>
 			<td>${cust.postalCode}</td>
 			<td>${cust.city}</td>
 	        <td>${cust.address}</td>
 	      </tr>
 	    </c:forEach>
 	    </table>
-	    <div style="height: 50px"></div>
 	    <div class="center">
 	      <div class="pagination">
 		      <c:if test="${pagination.existPrev}">
@@ -79,7 +80,7 @@
 <jsp:include page="../home/bottom.jsp"/>
 
 <script>
-$('.page').click(()=>{
+$('.page').each((index)=>{
 		location.assign('${ctx}/customer.do?cmd=cust_list&page=list&page_num='+$(this).text());
 });
 
@@ -87,7 +88,7 @@ $('#nav_5').click(()=>{
 		location.assign('${ctx}/product.do?cmd=move&page=pro_list');
 });
 
-$('#category').attr('style','cursor:pointer').attr('src','').click(function(){
+$('#category').attr('style','cursor:pointer').attr('src','').click(()=>{
 	location.assign('${ctx}/category.do?cmd=cate_list&page=cate_list');
 });
 </script>

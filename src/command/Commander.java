@@ -31,7 +31,7 @@ public class Commander {
 			cmd = new ExistCommand(pxy);
 			break;
 			
-		case CUST_LIST: case PRODUCT_LIST:
+		case CUST_LIST: case PRODUCT_LIST: case CATE_LIST:
 			System.out.println("COMMANDER::::LIST 로 온다");
 			cmd = new ListCommand(pxy);
 			break;
@@ -53,10 +53,6 @@ public class Commander {
 		case CUST_REMOVE:
 			cmd = new RemoveCommand(pxy);
 			break;
-		case CATE_LIST:
-			cmd = new ListCommand(pxy);
-			break;
-		
 		}
 		
 		System.out.println("커맨더 내: "+Receiver.cmd.getView());

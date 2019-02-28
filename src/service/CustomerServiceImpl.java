@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return instance;
 	}
 
-	CustomerDAO dao;
+	CustomerDAOImpl dao;
 
 	@Override
 	public void addCustomer(CustomerDTO cust) {
